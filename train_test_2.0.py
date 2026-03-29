@@ -72,7 +72,9 @@ for sub in df["SubGroup"].dropna().unique():
 # ===============================
 # CALCULATE P(S|T)
 # ===============================
-model = SentenceTransformer("all-MiniLM-L6-v2")
+model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+# paraphrase-multilingual-MiniLM-L12-v2
+# all-MiniLM-L6-v2
 vectors = model.encode(concept_names)
 
 similarity = cosine_similarity(vectors)

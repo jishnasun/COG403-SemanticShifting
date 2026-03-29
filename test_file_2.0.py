@@ -68,7 +68,9 @@ P_T = target_counts / target_counts.sum()
 this uses feature-overlap like in the lexical creativity paper for semantic relatedness
 '''
 
-model = SentenceTransformer("all-MiniLM-L6-v2")  # stealing form a pretrained language model for vector embeddings
+model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")  # stealing form a pretrained language model for vector embeddings
+# paraphrase-multilingual-MiniLM-L12-v2
+# all-MiniLM-L6-v2
 
 vectors = model.encode(concept_names)
 

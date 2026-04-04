@@ -17,7 +17,7 @@ lang_to_family = dict(zip(glotto["Name"], glotto["Family"]))
 lang_to_subgroup = dict(zip(glotto["Name"], glotto["SubGroup"]))
 
 # Filter accepted semantic shifts
-df = df[(df["Status"] == "ACCEPTED") & (df["Direction"] == "→")]
+df = df[(df["Status"] == "ACCEPTED")]
 
 # Add family/subgroup columns
 df["Family"] = df["Source_Language"].map(lang_to_family)
@@ -74,7 +74,7 @@ for sub in df["SubGroup"].dropna().unique():
 # ===============================
 model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 # paraphrase-multilingual-MiniLM-L12-v2
-# all-MiniLM-L6-v2
+
 vectors = model.encode(concept_names)
 
 similarity = cosine_similarity(vectors)

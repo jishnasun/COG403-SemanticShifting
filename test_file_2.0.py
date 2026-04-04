@@ -24,7 +24,7 @@ df = pd.read_csv("/Users/alicebaker/Library/CloudStorage/OneDrive-UniversityofTo
 # take a look at lexemes.tsv but there's basically a bunch of columns with SOURCE, TARGET
 # and the direction of semantic shift. It's raw so not all of them are actual shifts
 # df = df[(df["Status"] == "ACCEPTED") & (df["Direction"] == "→") & (df["Source_Language"] == "English")]  # pick out the actual accepted shifts
-df = df[(df["Status"] == "ACCEPTED") & (df["Direction"] == "→")]  # pick out the actual accepted shifts
+df = df[(df["Status"] == "ACCEPTED")]  # pick out the actual accepted shifts
 
 
 print(f"Total accepted semantic shifts: {len(df)}")  # can comment this out, mostly for testing
@@ -70,7 +70,6 @@ this uses feature-overlap like in the lexical creativity paper for semantic rela
 
 model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")  # stealing form a pretrained language model for vector embeddings
 # paraphrase-multilingual-MiniLM-L12-v2
-# all-MiniLM-L6-v2
 
 vectors = model.encode(concept_names)
 

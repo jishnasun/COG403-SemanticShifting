@@ -28,7 +28,7 @@ lang_to_subgroup = dict(zip(glotto["Name"], glotto["SubGroup"]))  # more specifi
 
 # take a look at lexemes.tsv but there's basically a bunch of columns with SOURCE, TARGET
 # and the direction of semantic shift. It's raw so not all of them are actual shifts
-df = df[(df["Status"] == "ACCEPTED") & (df["Direction"] == "→")]  # pick out the actual accepted shifts
+df = df[(df["Status"] == "ACCEPTED")]  # pick out the actual accepted shifts
 
 # Map Family and Subgroup to Source_Language using Name
 df["Family"] = df["Source_Language"].map(lang_to_family)
@@ -100,7 +100,7 @@ for sub in subgroups:
 this uses feature-overlap like in the lexical creativity paper for semantic relatedness
 '''
 
-model = SentenceTransformer("all-MiniLM-L6-v2")  # stealing form a pretrained language model for vector embeddings
+model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")  # stealing form a pretrained language model for vector embeddings
 
 vectors = model.encode(concept_names)
 

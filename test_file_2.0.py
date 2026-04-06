@@ -113,6 +113,7 @@ easiest part
 threshold = 0.05  # again so we aren't printing everything, just where there's an actual probability
 
 P_T_given_S = P_S_given_T * P_T
+np.fill_diagonal(P_T_given_S, 0)  # set all P(T|S) where T == S to 0
 
 # normalize rows (so the total is always 1)
 row_sums = P_T_given_S.sum(axis=1, keepdims=True)

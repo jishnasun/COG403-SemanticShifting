@@ -29,4 +29,7 @@ Relevant code regarding models, evaluation, and visualization of results:
 | `singLangTestCase.py`  | Evaluates proposed bayesian model accuracy per language and ranks them to produce `language_ranking_full.csv`.                                                 |
 | `testCaseGlotto.py`  | Evaluates modified bayesian model accuracy per language and ranks them to produce `language_ranking_glotto.csv`.                                                 |
 | `results.py`  | Visualization of accuracy results for all models and constituents.                                                 |
+| `test_significant.py`  | [description]                                                 |
+| `test_significant_fam.py`  | [description]                                                 |
+| `significanceTesting.py`  | [description]                                                 |
 

@@ -14,20 +14,19 @@ All code used for COG403 project on Bayesian modelling of semantic shift across 
 
 | File                                  | Description                                                                                                                        |
 |-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| `language_ranking_full.csv`                             | Languages ranked by accuracy of `testBayesianLanguage.py`.                      |
-| `language_ranking_glotto.csv`  | Languages ranked by accuracy of `testBayesianGlotto.py`.                                                 |
+| `language_ranking_full.csv`                             | Languages ranked by accuracy of `BayesianLanguage_model.py`.                      |
+| `language_ranking_glotto.csv`  | Languages ranked by accuracy of `BayesianGlotto_model.py`.                                                 |
 <br>
 
 Relevant code regarding models, evaluation, and visualization of results:
 
 | File                                  | Description                                                                                                                        |
 |-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| `testBayesianLanguage.py`                             | [description]                      |
-| `testBayesianGlotto.py`  | [description]                                                 |
-| `test_file_2.0.py`  | [description]                                                 |
-| `train_test_2.0.py`  | [description]                                                 |
-| `test_file_2.0.py`  | [description]                                                 |
-| `singLangTestCase.py`  | [description]                                                 |
-| `testCaseGlotto.py`  | [description]                                                 |
-| `results.py`  | [description]                                                 |
+| `BayesianLanguage_model.py`                             | Proposed bayesian model predicting semantic shift target concept, given the source concept.                   |
+| `BayesianGlotto_model.py`  | Modified bayesian model predicting semantic shift target concept, given the source concept. Prior accounts for language family of shift.                                                 |
+| `test_models.py`  | Evaluates proposed bayesian model (`BayesianLanguage_model.py`) and its constituents. Provides overall Top-1 and Top-5 model accuracy.                                                |
+| `test_glottoModel.py`  | Evaluates modified bayesian model (`BayesianGlotto_model.py`). Provides overall Top-1 and Top-5 model accuracy.                                                 |
+| `singLangTestCase.py`  | Evaluates proposed bayesian model accuracy per language and ranks them to produce `language_ranking_full.csv`.                                                 |
+| `testCaseGlotto.py`  | Evaluates modified bayesian model accuracy per language and ranks them to produce `language_ranking_glotto.csv`.                                                 |
+| `results.py`  | Visualization of accuracy results for all models and constituents.                                                 |
 

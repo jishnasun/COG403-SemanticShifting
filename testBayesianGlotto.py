@@ -9,13 +9,8 @@ NOTES!!!
 - I put TODOs where ever there are variables we can adjust / fiddle with
 - Might need to install some of those packages up there
     - On that note, sentence_transformers is a bit finicky so try pip install if the packages tab doesn't work
-- later we can separate it and do a version without P(T), but for now lets just submit one file for feasability
 - I mention it later but we pull from a pretrained language model for semantic relatedness
-    - might need to change this depending on what the prof says, it seems to work though
-- We should probably come up with some sort of visualization but that's for future us
-    - A next step could maybe be exporting the data to a csv or tsv or txt file to use later for visualization
-    - might be a pain if we're adjusting the variables though
-- We can also add an additional prior using the glottolog for language families
+- This file includes modified prior using the glottolog for language families
 '''
 
 # Retrieve data from lexemes.tsv and languages.csv (change the file path depending on your computer)
@@ -149,13 +144,14 @@ for lang in languages:
 
     '''FINAL BAYES EQUATION'''
     P_T_given_S = P_S_given_T * P_T
+    np.fill_diagonal(P_T_given_S, 0)  # set all P(T|S) where T == S to 0
     # Normalize
     row_sums = P_T_given_S.sum(axis=1, keepdims=True)
     row_sums[row_sums == 0] = 1
     P_T_given_S = P_T_given_S / row_sums
 
     '''
-    # TODO: tune these later
+    # Potential extension
     lambda_sub = 0.5
     lambda_fam = 0.3
     lambda_global = 0.2

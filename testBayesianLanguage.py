@@ -9,13 +9,8 @@ NOTES!!!
 - I put TODOs where ever there are variables we can adjust / fiddle with
 - Might need to install some of those packages up there
     - On that note, sentence_transformers is a bit finicky so try pip install if the packages tab doesn't work
-- later we can separate it and do a version without P(T), but for now lets just submit one file for feasability
 - I mention it later but we pull from a pretrained language model for semantic relatedness
-    - might need to change this depending on what the prof says, it seems to work though
-- We should probably come up with some sort of visualization but that's for future us
-    - A next step could maybe be exporting the data to a csv or tsv or txt file to use later for visualization
-    - might be a pain if we're adjusting the variables though
-- We can also add an additional prior using the glottolog for language families
+- See testBayesianGlotto.py for modified prior using the glottolog for language families
 '''
 
 # Retrieve data from lexemes.tsv (change the file path depending on your computer)
@@ -110,6 +105,7 @@ easiest part
 threshold = 0.05  # again so we aren't printing everything, just where there's an actual probability
 
 P_T_given_S = P_S_given_T * P_T
+np.fill_diagonal(P_T_given_S, 0)  # set all P(T|S) where T == S to 0
 
 # normalize rows (so the total is always 1)
 row_sums = P_T_given_S.sum(axis=1, keepdims=True)

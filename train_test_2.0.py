@@ -116,6 +116,9 @@ def evaluate_hierarchical_model(df, P_S_given_T, lang_to_family, lang_to_subgrou
             P_T = P_T_global
 
         P_T_given_S = P_S_given_T * P_T
+        np.fill_diagonal(P, 0)  # set all P(T|S) where T == S to 0
+
+        
         row_sums = P_T_given_S.sum(axis=1, keepdims=True)
         row_sums[row_sums == 0] = 1
         P_T_given_S /= row_sums

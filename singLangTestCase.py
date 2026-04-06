@@ -4,12 +4,15 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
 
+from testCaseGlotto import get_best_full, get_worst_fam, get_best_glotto
+
+
 
 # =====================================================
 # LOAD + FILTER DATA
 # =====================================================
 
-df = pd.read_csv("C:/Users/starw/PycharmProjects/COG403Project/cldf/lexemes.tsv", sep="\t")
+df = pd.read_csv("cldf/lexemes.tsv", sep="\t")
 
 df = df[(df["Status"] == "ACCEPTED")]
 #  & (df["Direction"] == "→")
@@ -237,3 +240,81 @@ print(worst_lang["shifts_df"])
 
 # UNCOMMENT TO SAVE CSV OF RANKED LANGUAGES
 # lang_df.to_csv("language_ranking_full.csv", index=False)
+
+# =====================================================
+# FOR VISUALIZATION
+# =====================================================
+def get_best_global():
+    # get language
+    lang = best_lang["language"]
+    df_blang = df[df["Source_Language"] == lang]
+
+    # get results
+    Mprior = evaluate_subset(P_prior, df_blang)
+    Msim = evaluate_subset(P_sim, df_blang)
+
+    # compile results
+    full = tuple(best_lang[["top1", "top5"]])
+    prior = (Mprior["top1"], Mprior["top5"])
+    sim = (Msim["top1"], Msim["top5"])
+    fam = get_best_full()
+
+    results = {
+        'language': lang,
+        'full': full,
+        'prior': prior,
+        'sim': sim,
+        'fam': fam
+    }
+
+    return results
+
+
+def get_best_fam():
+    lang = 'Standard Zhuang'
+    df_flang = df[df["Source_Language"] == lang]
+
+    # get results
+    Ffull = evaluate_subset(P_full, df_flang)
+    Fprior = evaluate_subset(P_prior, df_flang)
+    Fsim = evaluate_subset(P_sim, df_flang)
+
+    full = (Ffull["top1"], Ffull["top5"])
+    prior = (Fprior["top1"], Fprior["top5"])
+    sim = (Fsim["top1"], Fsim["top5"])
+    fam = get_best_glotto()
+
+    results = {
+        'language': lang,
+        'full': full,
+        'prior': prior,
+        'sim': sim,
+        'fam': fam
+    }
+
+    return results
+
+
+def get_worst():
+    lang = worst_lang["language"]
+    df_wlang = df[df["Source_Language"] == lang]
+
+    # get results
+    Mprior = evaluate_subset(P_prior, df_wlang)
+    Msim = evaluate_subset(P_sim, df_wlang)
+
+    # compile results
+    full = tuple(worst_lang[["top1", "top5"]])
+    prior = (Mprior["top1"], Mprior["top5"])
+    sim = (Msim["top1"], Msim["top5"])
+    fam = get_worst_fam()
+
+    results = {
+        'language': lang,
+        'full': full,
+        'prior': prior,
+        'sim': sim,
+        'fam': fam
+    }
+
+    return results

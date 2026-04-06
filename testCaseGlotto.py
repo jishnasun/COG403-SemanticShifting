@@ -8,8 +8,8 @@ from sentence_transformers import SentenceTransformer
 # ===============================
 # LOAD DATA
 # ===============================
-df = pd.read_csv("C:/Users/starw/PycharmProjects/COG403Project/cldf/lexemes.tsv", sep="\t")
-glotto = pd.read_csv("C:/Users/starw/PycharmProjects/COG403Project/cldf/languages.csv", sep=",")
+df = pd.read_csv("cldf/lexemes.tsv", sep="\t")
+glotto = pd.read_csv("cldf/languages.csv", sep=",")
 glotto.columns = glotto.columns.str.strip()  # remove whitespace issues
 
 # Map language → family/subgroup
@@ -286,3 +286,22 @@ print(worst_lang["shifts_df"])
 
 # UNCOMMENT TO SAVE CSV OF RANKED LANGUAGES
 # lang_df.to_csv("language_ranking_glotto.csv", index=False)
+
+
+# =====================================================
+# FOR VISUALIZATION
+# =====================================================
+df_masai = lang_df[lang_df["language"] == "Masai"]
+df_yoruba = lang_df[lang_df["language"] == "Yoruba"]
+
+
+def get_best_full():
+    return tuple(df_masai[['top1', 'top5']].iloc[0])
+
+
+def get_best_glotto():
+    return tuple(best_lang[['top1', 'top5']])
+
+
+def get_worst_fam():
+    return tuple(df_yoruba[['top1', 'top5']].iloc[0])
